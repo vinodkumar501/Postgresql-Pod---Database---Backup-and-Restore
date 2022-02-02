@@ -1,3 +1,45 @@
+NOTE: 
+THE SERVER WHERE YOU ARE TAKING BACKUP WILL BE INSTALLED POSTGRESQL SERVER (SERVER (VM) 
+OTHERWISE PG_DUMP WILL NOT WORK
+
+ON UBUNTU (DEBIAN)
+
+INSTALL PG_DUMP
+***** https://www.spritle.com/blogs/2019/11/26/how-to-fix-pg_dump-aborting-because-of-server-version-mismatch/ *******
+
+ERROR:
+pg_dump: server version: 9.3.4; pg_dump version: 9.2.8
+
+If you face the error pg_dump: server version: 11.6 (Debian 11.6-1.pgdg90+1); pg_dump version: 10.10 (Ubuntu 10.10-0ubuntu0.18.04.1) and pg_dump: aborting because of server version mismatch, then you can fix it by upgrading your PostgreSQL client by following the below command.
+
+#sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" >> /etc/apt/sources.list.d/pgdg.list'
+#wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+#sudo apt-get update
+#sudo apt-get install -y postgresql-client-11
+that’s it. You can check whether the correct version is installed or not by checking the version.
+
+~$ psql -V
+psql (PostgreSQL) 11.6 (Ubuntu 11.6-1.pgdg18.04+1)
+
+***********************************************************************************************************************
+Backup:
+
+pg_dump -h 33.110.11.29 -U keycloak keycloak > 33_110_11_29_keycloak_$(date +%d-%m-%y).bak
+
+33_110_11_29_keycloak_02-02-22.bak 
+
+
+#sudo find / -name pg_dump
+/usr/bin/pg_dump
+
+whereis pg_dump
+pg_dump: /usr/bin/pg_dump /usr/share/man/man1/pg_dump.1.gz
+
+# need to mention k8s svc ip without port
+k8s svc ex:
+33.110.11.2:5432
+
+
 https://stackoverflow.com/questions/13868821/shell-script-to-delete-directories-older-than-n-days
 ##########################################################################################
 script explanation
@@ -49,7 +91,9 @@ find: the unix command for finding files / directories / links etc.
 rm -rf {}: recursively force remove the directory; the {} part is where the find result gets substituted into from the previous part.
 
 
+POSTGRESQL:
 
+https://www.tecmint.com/backup-and-restore-postgresql-database/
 
 
 
