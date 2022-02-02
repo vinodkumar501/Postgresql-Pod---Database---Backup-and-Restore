@@ -15,3 +15,4 @@ find /root/db_backup  -type  f -name '*.gz' -mtime +7 -exec rm {} \;            
 echo "Database Backup for LLE Completed successfully $(date +%d-%m-%y)"| mail -r"testing.gmail.com" -s "DB Backup for LLE" devteam@gmail.com qateam@gmail.com 
 rm -rf *.bak
 
+#mail -r"testing.gmail.com"  ---> smtp server need to mention
