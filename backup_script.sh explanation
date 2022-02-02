@@ -89,6 +89,8 @@ find: the unix command for finding files / directories / links etc.
 -exec ... \;: for each such result found, do the following command in ...
 rm -rf {}: recursively force remove the directory; the {} part is where the find result gets substituted into from the previous part.
 
+https://severalnines.com/database-blog/backup-postgresql-using-pgdump-and-pgdumpall
+
 
 POSTGRESQL:
 
