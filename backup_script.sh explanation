@@ -1,33 +1,31 @@
 https://stackoverflow.com/questions/13868821/shell-script-to-delete-directories-older-than-n-days
 ##########################################################################################
-#COMPLETED script explanation
+script explanation
 
+pg_dump -h 33.110.11.29 -U keycloak keycloak > 33_110_11_29_keycloak_$(date +%d-%m-%y).bak
+O/P
+33_110_11_29_keycloak_02-02-22.bak
 
-#pg_dump -h 33.110.11.29 -U keycloak keycloak > 33_110_11_29_keycloak_$(date +%d-%m-%y).bak
-#O/P
-#33_110_11_29_keycloak_02-02-22.bak
+pg_dump -h 33.110.11.23 -U keycloak keycloak > 33_110_11_23_keycloak_$(date +%d-%m-%y).bak
+33_110_11_23_keycloak_02-02-22.bak
 
-#pg_dump -h 33.110.11.23 -U keycloak keycloak > 33_110_11_23_keycloak_$(date +%d-%m-%y).bak
-#33_110_11_23_keycloak_02-02-22.bak
+Compress all *.bak files into 1 file as tar.gz
+tar -czf db_backup/db_backup_$(date +%d-%m-%y).tar.gz *.bak 
 
-#Compress all *.bak files into 1 file as tar.gz
-#tar -czf db_backup/db_backup_$(date +%d-%m-%y).tar.gz *.bak 
 #it takes all *.bak files created and create a tar.gz file under 
-
-#dbbackup/db_backup_02-02-22.tar.gz  (db_backup_02-02-22.tar.gz)
+dbbackup/db_backup_02-02-22.tar.gz  (db_backup_02-02-22.tar.gz)
 
 #https://stackoverflow.com/questions/13868821/shell-script-to-delete-directories-older-than-n-days
-#find /root/db_backup  -type  f -name '*.gz' -mtime +7 -exec rm {} \;
+find /root/db_backup  -type  f -name '*.gz' -mtime +7 -exec rm {} \;
+
 It delete the files older than 7 days 
 -type f -name '*.gz'
-
 
 [root@psql-backup db_backup]# ls
 
 db_backup_01-02-22.tar.gz  db_backup_27-01-22.tar.gz  db_backup_30-01-22.tar.gz
 db_backup_02-02-22.tar.gz  db_backup_28-01-22.tar.gz  db_backup_31-01-22.tar.gz
 db_backup_26-01-22.tar.gz  db_backup_29-01-22.tar.gz
-
 
 [root@psql-backup db_backup]# find /root/db_backup  -type  f -name '*.gz' -mtime +3 -exec rm {} \;
 [root@psql-backup db_backup]# ls
@@ -39,9 +37,8 @@ after executing above command it delete older than 3 days using timestamp
 
 ################################################################################
 
-This will do it recursively for you:
-
 find /path/to/base/dir/* -type d -ctime +10 -exec rm -rf {} \;
+
 Explanation:
 
 find: the unix command for finding files / directories / links etc.
@@ -50,5 +47,17 @@ find: the unix command for finding files / directories / links etc.
 -ctime +10: only consider the ones with modification time older than 10 days
 -exec ... \;: for each such result found, do the following command in ...
 rm -rf {}: recursively force remove the directory; the {} part is where the find result gets substituted into from the previous part.
+
+
+
+
+
+
+
+
+
+
+
+
 
 
