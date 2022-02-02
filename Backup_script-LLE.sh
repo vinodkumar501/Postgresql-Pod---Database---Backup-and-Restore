@@ -1,5 +1,5 @@
 rm -rf *.bak
-pg_dump -h 35. -U boarding boarding > 35_230_69_152_boarding_$(date +%d-%m-%y).bak
+pg_dump -h 35.110.12.32 -U boarding boarding > 35_230_69_152_boarding_$(date +%d-%m-%y).bak
 pg_dump -h 33.110.11.21 -U boarding boarding > 33_110_11_21_boarding_$(date +%d-%m-%y).bak
 pg_dump -h 33.110.11.24. -U keycloak keycloak > 33_110_11_24_keycloak_$(date +%d-%m-%y).bak
 pg_dump -h 33.110.11.27 -U keycloak keycloak > 33_110_11_27_keycloak_$(date +%d-%m-%y).bak
