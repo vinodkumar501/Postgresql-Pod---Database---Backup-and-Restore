@@ -23,7 +23,7 @@ cat ${backup_dir}/keycloak_*.sql | bzip2 | openssl smime -encrypt -aes256 -binar
 
 gsutil cp ${backup_dir}/keycloak_*.ssl ${BUCKET}/key
 
-#Deleting 15 days old backup file
+#Deleting 15 days old backup file # you need to metnion in bucket Retention policy to 15 days
 
 gsutil rm  ${BUCKET}/key/*
 gsutil rm  ${BUCKET}/app/*
