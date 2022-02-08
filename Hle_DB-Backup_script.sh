@@ -5,7 +5,7 @@ backup_public_key="/etc/cert/lle_psql_bak.pem.pub"
 backup_dir="/root/backup"                                                        # this directory you should have in script vm
 backup_date=`date +%Y-%m-%d-%H-%M-%S`
 DELETE="rm -f "
-BUCKET="gs://lle-app"
+BUCKET="gs://lle-app"                                                            #gsutil URI gs://lle-app   #will get it an bucket configuration
 
 gcloud beta container clusters get-credentials cluster-1 --region us-east1 --project cluster-16546 -q
 
