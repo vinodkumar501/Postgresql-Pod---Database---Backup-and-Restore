@@ -1,0 +1,40 @@
+https://stackoverflow.com/questions/42360853/how-to-backup-a-postgres-database-in-kubernetes-on-google-cloud
+
+###################DB BACKUP###################
+
+#kubectl exec app-postgresql-664fc68775-wrht -- bash -c "pg_dump -U admin postgres" > database1.sql
+Before empty database
+671 Feb  8 08:39 database.sql
+
+#####################DB RESOTRE#################
+
+#Restore(Uploading) dev backup to the pod 
+cat dev.sql | kubectl exec -i  app-postgresql-664fc68775-wrht  -- psql -U admin -d postgres
+
+the imported dev.sql having 173587 Feb  8 05:26 data , check over pgadmin and tables and sth or export same backup and check its should be "173587"
+After restoring dev data its having some tables check 
+
+kubectl exec app-postgresql-664fc68775-wrht -- bash -c "pg_dump -U admin postgres" > database1.sql
+
+ls database1.sql
+ 173587 Feb  8 05:26 
+ 
+ 
+ 
+ The imported same data of dev.sql successfully imported to pod app-postgresql-664fc68775-wrht
+ 
+ 
+ =================================================
+ 
+ DUMP
+// pod-name         name of the postgres pod
+// postgres-user    database user that is able to access the database
+// database-name    name of the database
+kubectl exec [pod-name] -- bash -c "pg_dump -U [postgres-user] [database-name]" > database.sql
+
+
+RESTORE
+// pod-name         name of the postgres pod
+// postgres-user    database user that is able to access the database
+// database-name    name of the database
+cat database.sql | kubectl exec -i [pod-name] -- psql -U [postgres-user] -d [database-name]
