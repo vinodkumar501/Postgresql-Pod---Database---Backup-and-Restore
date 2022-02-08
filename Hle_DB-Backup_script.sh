@@ -2,7 +2,7 @@
 export CLOUDSDK_CORE_DISABLE_PROMPTS=1
 #Dev DB Backup
 backup_public_key="/etc/cert/lle_psql_bak.pem.pub"
-backup_dir="/root/backup"
+backup_dir="/root/backup"                                                        # this directory you should have in script vm
 backup_date=`date +%Y-%m-%d-%H-%M-%S`
 DELETE="rm -f "
 BUCKET="gs://lle-app"
