@@ -60,7 +60,7 @@ data:
 ---
 apiVersion: v1
 kind: Service
-mtadata:
+metadata:
   labels:
     io.kompose.service: dev-postgresql
   name: dev-postgresql
