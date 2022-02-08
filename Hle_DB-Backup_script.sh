@@ -9,7 +9,7 @@ BUCKET="gs://lle-app"
 
 gcloud beta container clusters get-credentials cluster-1 --region us-east1 --project cluster-16546 -q
 
-${DELETE} ${backup_dir}/*
+${DELETE} ${backup_dir}/*                                                       # It remove all files insdie the folder /root/backup/*
 
 kubectl exec $(kubectl get po | grep -e '^dev-postgres' | head -n 1 | awk '{print $1}') -- bash -c "PGPASSWORD=admin  pg_dump -U admin -d dev-postgres" > ${backup_dir}/dev1_db_${backup_date}.sql
 
