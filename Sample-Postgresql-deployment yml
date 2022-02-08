@@ -1,0 +1,110 @@
+https://stackoverflow.com/questions/42360853/how-to-backup-a-postgres-database-in-kubernetes-on-google-cloud
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dev-postgresql
+  labels:
+    io.kompose.service: dev-postgresql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: dev-postgresql
+  template:
+    metadata:
+      labels:
+        io.kompose.service: dev-postgresql
+    spec:
+       containers:
+       - name: preboard-app-postgresql  
+         image: postgres:9.6.5
+         ports:
+         - containerPort: 5432
+         env:
+         - name: POSTGRES_PASSWORD
+           valueFrom:
+            secretKeyRef:
+               name: dev-psql
+               key: password
+         - name: POSTGRES_USER
+           valueFrom:
+            secretKeyRef:
+               name: dev-psql
+               key: username
+         - name: PGDATA
+           value: /var/lib/postgresql/data/pgdata 
+         volumeMounts:
+         - mountPath: /var/lib/postgresql/data
+           name: dev-storage
+         - name: tz-config
+           mountPath: /etc/localtime
+	   volumes:
+       - name: dev-storage
+         persistentVolumeClaim:
+          claimName: dev-database
+       - name: tz-config
+         hostPath:
+           path: /usr/share/zoneinfo/Asia/Calcutta
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: dev-psql
+type: Opaque
+data:
+  username: cm9vdA==         # root
+  password: cm9vdA==
+---
+apiVersion: v1
+kind: Service
+mtadata:
+  labels:
+    io.kompose.service: dev-postgresql
+  name: dev-postgresql
+spec:
+  ports:
+  - name: "5432"
+    port: 5432
+    targetPort: 5432
+  selector:
+    io.kompose.service: dev-postgresql
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: dev-database
+  namespace:
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+---
+#https://kubernetes.io/docs/concepts/storage/storage-classes/
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: regional-storageclass
+provisioner: kubernetes.io/gce-pd
+parameters:
+  type: pd-standard
+  replication-type: region-pd
+  zones: us-east1-a, us-east1-b
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
