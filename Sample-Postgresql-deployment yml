@@ -1,4 +1,5 @@
 #https://stackoverflow.com/questions/42360853/how-to-backup-a-postgres-database-in-kubernetes-on-google-cloud
+#http://www.yamllint.com/
 
 
 apiVersion: apps/v1
