@@ -40,7 +40,7 @@ spec:
            name: dev-storage
          - name: tz-config
            mountPath: /etc/localtime
-	   volumes:
+       volumes:
        - name: dev-storage
          persistentVolumeClaim:
           claimName: dev-database
