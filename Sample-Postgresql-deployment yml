@@ -1,4 +1,4 @@
-https://stackoverflow.com/questions/42360853/how-to-backup-a-postgres-database-in-kubernetes-on-google-cloud
+#https://stackoverflow.com/questions/42360853/how-to-backup-a-postgres-database-in-kubernetes-on-google-cloud
 
 
 apiVersion: apps/v1
