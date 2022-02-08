@@ -1,0 +1,9 @@
+#Create free style project --> On Build step --> Execute shell --> Add a script file on Jenkins to trigger a job
+
+sh /var/lib/jenkins/backup/Hle_DB-Backup_script.sh
+
+gsutil ls gs://lle-app/app
+echo "###################"
+gsutil ls gs://lle-app/key
+echo "###################"
+echo "Backup Uploaded to Bucket"
