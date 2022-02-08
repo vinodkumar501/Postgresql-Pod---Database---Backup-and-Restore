@@ -1,0 +1,5 @@
+#first create a vm and add a script file on specific path 
+#both script will start at 12.05AM
+
+5 0 * * * /bin/sh /root/Hle_DB-Backup_script.sh > /dev/null 2>&1
+5 0 * * * /bin/sh /root/Backup_script-LLE.sh > /dev/null 2>&1
