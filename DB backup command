@@ -1,0 +1,1 @@
+kubectl exec board-app-postgresql-854fbc9c5b-wvgx8 -- bash -c "pg_dump -U eboard -d boarding -w"  > database.sql
